@@ -1,0 +1,47 @@
+class BikeRental:
+  stock = 100
+  def __init__(self):
+    print( "Welcome to rental bike shop.")
+
+  def displaystock(self):
+    print(f"Total stock available: {BikeRental.stock}")
+
+bike_shop = BikeRental()
+print()
+bike_shop.displaystock()
+class customer(BikeRental):
+  bill=0
+  def __init__(self,number_of_bikes,rentalBasis,number_of_days_or_weeks):
+    self.number_of_bikes=number_of_bikes
+    self.rentalBasis=rentalBasis
+    self.number_days_or_weeks=number_of_days_or_weeks
+
+  def rentBike(self):
+    if self.number_of_bikes<=0:
+      print('number of bikes should be positive')
+    elif self.number_of_bikes > BikeRental.stock:
+      print(f'number of bikes available to rent: {BikeRental.stock}')
+    else:
+      print(f'the number of bikes rented by the customer:{self.number_of_bikes}')
+      BikeRental.stock = BikeRental.stock - self.number_of_bikes #
+      print(f'the updated stock:{BikeRental.stock}')
+
+  def returnBike(self):
+    if self.rentalBasis == 'daily':
+      bill = self.number_of_bikes * 100 * self.number_days_or_weeks
+    elif self.rentalBasis == 'week':
+      bill = self.number_of_bikes * 500 * self.number_days_or_weeks
+
+    if self.number_of_bikes >= 3 and self.number_of_bikes <= 5:
+      print(f'you are eligible for family rental promotion of 30% discount')
+      bill = bill * 0.7
+    return bill
+
+
+
+number_of_bikes=5
+rentalBasis='daily'
+number_days_or_weeks=3
+customer_1=customer(number_of_bikes,rentalBasis,number_days_or_weeks)
+customer_1.rentBike()
+customer_1.returnBike()
