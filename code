@@ -1,1 +1,71 @@
+contacts = [
+    {'name':'xyz','number':'657','email':'xyz@gmail.com'},
+    {'name':'abc','number':'123','email':'abc@gmail.com'},
+    {'name':'pqr','number':'890','email':'pqr@gmail.com'}
+]
+
+def show_contacts(contacts):
+    print("\nAll Contacts:")
+    for contact in contacts:
+        print(" -", contact['name'])
+    print()
+
+def add_contact(contacts):
+    name = input('Enter name: ')
+    number = input('Enter number: ')
+    email = input('Enter email: ')
+    new_contact = {'name': name, 'number': number, 'email': email}
+    contacts.append(new_contact)
+    print("Contact added!")
+
+def delete_contact(contacts, name):
+    for contact in contacts:
+        if contact['name'] == name:
+            contacts.remove(contact)
+            print("🗑️ Contact deleted.")
+            return
+    print(" Contact not found.")
+
+def update_contact(contacts, name):
+    for contact in contacts:
+        if contact['name'] == name:
+            contact['name'] = input('Enter new name: ')
+            contact['number'] = input('Enter new number: ')
+            contact['email'] = input('Enter new email: ')
+            print("Contact updated!")
+            return
+    print(" Contact not found.")
+
+def open_contact(contacts, name):
+    for contact in contacts:
+        if contact['name'] == name:   
+            print("\n Contact Details:")
+            print(f"Name: {contact['name']}")
+            print(f"Number: {contact['number']}")
+            print(f"Email: {contact['email']}")
+            return
+    print(" Match not found.")
+
+from IPython.display import clear_output
+
+while True:
+    show_contacts(contacts)
+    action = input("Press 'a' to add, 'o' to open, 'u' to update, 'd' to delete, 'q' to quit: ").lower()
+    
+    if action == 'a':
+        add_contact(contacts)
+    elif action == 'o':
+        name = input("Enter contact name to open: ")
+        open_contact(contacts, name)
+    elif action == 'u':
+        name = input("Enter contact name to update: ")
+        update_contact(contacts, name)
+    elif action == 'd':
+        name = input("Enter contact name to delete: ")
+        delete_contact(contacts, name)
+    elif action == 'q':
+        print("Goodbye!")
+        break
+    else:
+        print(" Invalid option.")
 
